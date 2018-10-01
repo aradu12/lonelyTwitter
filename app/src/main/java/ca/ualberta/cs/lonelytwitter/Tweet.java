@@ -9,21 +9,6 @@ public abstract class Tweet {
     protected Date date;
     private ArrayList<MoodModel> moods;
 
-    public Tweet(String message,Date date) throws TooLongTweetException{
-        if (message.length() > 140) {
-            throw new TooLongTweetException();
-        }
-        this.message = message;
-        this.date = date;
-    }
-
-    public Tweet(String message) throws TooLongTweetException{
-        if (message.length() > 140) {
-            throw new TooLongTweetException();
-        }
-        this.message = message;
-        this.date = new Date();
-    }
 
     public void setMessage(String message) throws TooLongTweetException {
         if (message.length() > 140) {
@@ -54,4 +39,7 @@ public abstract class Tweet {
     public void addMood(MoodModel mood) {
         moods.add(mood);
     }
+    public String toString(){
+    	return this.date.toString()+" | "+this.message;
+}
 }
