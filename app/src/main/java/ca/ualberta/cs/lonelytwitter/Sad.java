@@ -1,9 +1,8 @@
-/* CMPUT 301 F18 Lab 2
- * Written by Aida Radu
- * Sept. 20 2018
+/**
+ * Child MoodModel class representing a sad mood
+ * @author Aida Radu
  */
 
-/* Child MoodModel class representing a sad mood */
 
 package ca.ualberta.cs.lonelytwitter;
 
@@ -19,6 +18,8 @@ public class Sad extends MoodModel {
         super();
     }
 
+    /** 
+     * @return a string representation of the mood */
     @Override
     public String getMood() {
         return "I am Sad";

@@ -21,6 +21,12 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+/**
+ * An android activity that handles loading ans saving tweets
+ * @author Aida Radu adapted from Joshua Charles Campbell
+ */
+
 public class LonelyTwitterActivity extends Activity {
 
     private static final String FILENAME = "file.sav";
@@ -58,7 +64,10 @@ public class LonelyTwitterActivity extends Activity {
             }
         });*/
     }
-
+	
+    /**
+    * Called when the activity starts
+    */
     @Override
     protected void onStart() {
         // TODO Auto-generated method stub
@@ -69,6 +78,9 @@ public class LonelyTwitterActivity extends Activity {
         oldTweetsList.setAdapter(adapter);
     }
 
+    /**
+     * loads a list of tweets from a file
+     */
     private void loadFromFile() {
 
         try {
@@ -90,7 +102,12 @@ public class LonelyTwitterActivity extends Activity {
 	}
 }
  
-
+    
+    /**
+     * Saves a tweet to a file
+     * @param  Tweet - the tweet to save
+     * @param  Date -  the date of the tweet to save
+     */
     private void saveInFile(Tweet tweet, Date date) {
         try {
 		FileOutputStream fos = openFileOutput(FILENAME,0);
@@ -108,6 +125,11 @@ public class LonelyTwitterActivity extends Activity {
             e.printStackTrace();
         }
     }
+
+/**
+ * Saves a tweet
+ * @param View - the view clicked
+ */
  public void saveOnClick(View view) {
          String text = bodyText.getText().toString();
              ImportantTweet newTweet = new ImportantTweet();
