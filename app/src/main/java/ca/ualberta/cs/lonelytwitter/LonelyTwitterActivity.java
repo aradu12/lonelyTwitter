@@ -10,6 +10,7 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.content.Context;
@@ -53,7 +54,8 @@ public class LonelyTwitterActivity extends Activity {
 				Tweet newTweet = new NormalTweet(text);
 				tweetList.add(newTweet);
 				adapter.notifyDataSetChanged();
-				saveInFile(); // TODO replace this with elastic search
+				new ElasticsearchTweetController.addTweetTask().execute(newTweet);
+
 			}
 		});
 
@@ -74,8 +76,14 @@ public class LonelyTwitterActivity extends Activity {
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		loadFromFile(); // TODO replace this with elastic search
-		adapter = new ArrayAdapter<Tweet>(this,
+        try {
+            new ElasticsearchTweetController.getTweetsTask().execute("").get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        adapter = new ArrayAdapter<Tweet>(this,
 				R.layout.list_item, tweetList);
 		oldTweetsList.setAdapter(adapter);
 	}
